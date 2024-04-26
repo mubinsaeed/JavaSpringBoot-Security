@@ -1,0 +1,24 @@
+Spring self implement the user id and password for the api endpoint just by importing the package of spring starter
+security NOTE this is the form based authentication
+
+
+BASIC AUTH
+Specify username and password in the request header AS BASIC 64, server matches with the known password and resend the status
+Cannot logout, Need to send username and password for every request
+//Following below is the code that is deprecated for newer migration refer https://docs.spring.io/spring-security/reference/5.8/migration/servlet/config.html
+
+@Configuration
+@EnableWebSecurity
+public class ApplicationSecurityConfing extends WebSecurityConfigurerAdapter{
+
+@Override
+protected void configure (HttpSecurity http) throws Exception{
+http
+.authorizeRequests()
+.antMatchers("/","index","/css/*","/js/")  //This white list the files mentioned so no need for uid and password to access these files
+.anyRequest()
+.authenticated()
+.and()
+.httpBasic();
+}
+}
