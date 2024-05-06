@@ -32,6 +32,23 @@ In below snippet the api/... would only be accessed by the users who have their 
                         .requestMatchers("/","index","/css/*","/js*").permitAll()
                         .requestMatchers("/api/**")
                         .hasRole(ApplicationUserRole.STUDENT.name())
+
                         .anyRequest()
                         .authenticated()
                 )
+
+
+ ------------Disabling the csrf----------------
+ By default for role based and general put,post and delete is marked 403 status even with correct basic auth
+ The reason is for security purpose to disable not recommended   .csrf(csrf -> csrf.disable());
+
+ ------------------For Allowing Specific Http request by permission----------------
+  .requestMatchers(HttpMethod.DELETE,"/management/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.name())
+                         .requestMatchers(HttpMethod.PUT,"/management/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.name())
+                         .requestMatchers(HttpMethod.POST,"/management/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.name())
+
+ --------------------Allowing has any role for that particular api-------------------------
+    .requestMatchers(HttpMethod.GET,"/management/**").hasAnyRole(ApplicationUserRole.ADMINTRAINEE.name(),ApplicationUserRole.ADMIN.name())
+
+
+REMEMBER THAT THE requestMatchers order matters
