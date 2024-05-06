@@ -22,3 +22,16 @@ http
 .httpBasic();
 }
 }
+
+
+ROLES and Permission
+Roles is the higher level view, within roles there are permission
+
+In below snippet the api/... would only be accessed by the users who have their role set as student.
+ .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/","index","/css/*","/js*").permitAll()
+                        .requestMatchers("/api/**")
+                        .hasRole(ApplicationUserRole.STUDENT.name())
+                        .anyRequest()
+                        .authenticated()
+                )
