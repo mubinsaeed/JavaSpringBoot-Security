@@ -52,3 +52,9 @@ In below snippet the api/... would only be accessed by the users who have their 
 
 
 REMEMBER THAT THE requestMatchers order matters
+
+
+-------------------------CSRF------------------------------------------
+The flow of csrf is as follows:
+CLient login ----=> server sends a csrf token as cookie to the client
+Client makes any form request as put post delete ===> Server validated the csrf for request
