@@ -58,3 +58,9 @@ REMEMBER THAT THE requestMatchers order matters
 The flow of csrf is as follows:
 CLient login ----=> server sends a csrf token as cookie to the client
 Client makes any form request as put post delete ===> Server validated the csrf for request
+
+
+----------Form Based Authentication------------------------------------
+Client send username and password
+The server validates it and sent cookie with session id
+For other request server checks for the session id
